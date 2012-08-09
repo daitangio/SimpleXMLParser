@@ -10,6 +10,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -42,6 +43,18 @@ public class SimpleXMLParserTest {
 
 	@Test
 	public void testSimpleParse() {		
+		parse("<A><Star>Ciao!</Star></A>",
+				new SimpleXMLParser(){
+					public void do_A_STAR(String content){	
+						assertEquals("Ciao!",content);
+						success=true; // Required to be sure we are here
+					}
+				});						
+	}
+
+	
+	@Test
+	public void testSimpleParseConfusion() {		
 		parse("<A_GOOD_START>Hi inside tag A_GOOD_START</A_GOOD_START>",
 				new SimpleXMLParser(){
 					public void do_A_GOOD_START(String content){	
@@ -66,7 +79,7 @@ public class SimpleXMLParserTest {
 	
 	@Test
 	public void testAttributePassingButNotReading(){
-		parse("<A_GOOD_START ciao='karmak'>Hi inside tag A_GOOD_START</A_GOOD_START>",
+		parse("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><A_GOOD_START ciao='karmak'>Hi inside tag A_GOOD_START</A_GOOD_START>",
 				new SimpleXMLParser(){
 					public void do_A_GOOD_START(String content){	
 						assertEquals("Hi inside tag A_GOOD_START",content);
@@ -77,7 +90,7 @@ public class SimpleXMLParserTest {
 	
 	
 	@Test
-	public void testAttributePassingAndtReading(){
+	public void testAttributePassingAndReading(){
 		// Note: without xml version spec(first line)+ you got trubles! */
 		parse("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"+				
 				"<A><GOOD_START ciao=\"karmak\">Hi inside tag A_GOOD_START</GOOD_START></A>",
@@ -91,6 +104,32 @@ public class SimpleXMLParserTest {
 						}
 					}
 				});	
+	}
+	
+	
+	/**
+	 * Fails because the two methods are not called?
+	 * If needed, study a fix 
+	 */
+	@Ignore
+	@Test
+	public void testAttributePassingAndReading2(){
+		// Note: without xml version spec(first line)+ you got trubles! */
+		parse("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"+				
+				"<A><GOOD_START ciao=\"karmak\">Hi inside tag A_GOOD_START</GOOD_START></A>",
+				new SimpleXMLParser(){
+					public void do_A_GOOD_START(Map<String,String> attribs, String content){
+						System.out.println("ATTRIBS:"+attribs);
+						assertEquals("Hi inside tag A_GOOD_START",content);						
+						success=attribs.get("ciao").equals("karmak");						
+					}
+					
+					
+					public void do_A_GOOD_START(String content){							
+						expectedOutput=content;
+					}
+				});	
+		assertEquals("Hi inside tag A_GOOD_START",expectedOutput);
 	}
 
 

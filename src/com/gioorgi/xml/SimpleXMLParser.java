@@ -58,8 +58,8 @@ public abstract class SimpleXMLParser extends org.xml.sax.helpers.DefaultHandler
 	// **********************************************************************
 
 	/**
-	 * Default beahavior is to remember failed method call.
-	 * Anyway you can have truoble with tag with have sometimes attributes and sometimes have not 
+	 * Default behavior is to remember failed method call.
+	 * Anyway you can have trouble with tag with have sometimes attributes and sometimes have not 
 	 *  (which is weird by the way)
 	 * so  you can disable it 
 	 * @param optimize
@@ -83,7 +83,6 @@ public abstract class SimpleXMLParser extends org.xml.sax.helpers.DefaultHandler
 		String method = buildMethodName();
 		boolean skip= optimize && toIgnore.containsKey(method);
 		if(!skip){
-			// lc.info("Searching dynaMethod for:"+method);
 			try {
 				Method m = getClass().getMethod(method,
 						new Class[] { String.class });
@@ -98,7 +97,6 @@ public abstract class SimpleXMLParser extends org.xml.sax.helpers.DefaultHandler
 	
 			} catch (NoSuchMethodException e) {
 				if(currentAttributes.getLength()>0){							
-					//lc.debug(currentAttributes.getQName(0)+"="+currentAttributes.getValue(0));
 					Map<String, String> m= new TreeMap<String, String>();
 					for(int i=0; i<currentAttributes.getLength();i++){
 						m.put(currentAttributes.getQName(i),currentAttributes.getValue(i));					

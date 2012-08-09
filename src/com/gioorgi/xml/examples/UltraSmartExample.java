@@ -25,12 +25,10 @@ public class UltraSmartExample extends SimpleXMLParser {
 	public static void main(String[] args) throws SAXException, IOException {
 		// For your preferred guy System.setProperty("org.xml.sax.driver","org.apache.crimson.parser.XMLReaderImpl");
 		BasicConfigurator.configure();
-		String str = "<A><bad>Hi spencer!</bad><GOOD><DAY>is</DAY><DAY>is2</DAY></GOOD></A>";
+		
 
-		test(str);
-		// Test 2
-		// xmlns:wp="http://wordpress.org/export/1.2/"
-		test("<A_GOOD_START>Hi inside tag A_GOOD_START </A_GOOD_START>");
+		test( "<A><bad>Hi spencer!</bad><GOOD><DAY>is</DAY><DAY>is2</DAY></GOOD></A>");
+		test("<A_GOOD_START>Hi inside tag A_GOOD_START</A_GOOD_START>");
 		test("<A xmlns:my='http://gioorgi.com'> <my:GOOD_START>Example of ignored my namespace</my:GOOD_START></A>");
 		test("<A><GOOD><START>Hi inside a simple &amp; nested START TAG </START></GOOD></A>");
 		test("<_>True Ugly do__ interceptor </_>");
@@ -46,8 +44,8 @@ public class UltraSmartExample extends SimpleXMLParser {
 
 	private static void test(String str) throws SAXException, IOException {
 		XMLReader sax2Parser = XMLReaderFactory.createXMLReader();
-		UltraSmartExample singleSignOnParser = new UltraSmartExample();
-		sax2Parser.setContentHandler(singleSignOnParser);
+		UltraSmartExample parser = new UltraSmartExample();
+		sax2Parser.setContentHandler(parser);
 		ByteArrayInputStream is = new ByteArrayInputStream(str.getBytes());
 		InputSource s = new InputSource(is);
 		sax2Parser.parse(s);

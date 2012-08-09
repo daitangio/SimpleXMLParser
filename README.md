@@ -1,8 +1,13 @@
 SimpleXMLParser
 ===============
 
-The easiest way of parsing xml in Java, avoiding complex XPath learining...
+The easiest way of parsing xml in Java, avoiding complex XPath learning...
+Take a look to http://gioorgi.com/2012/simplexmlparser/ ‎
+for a tutorial introduction
 
+
+So What?
+=========
 
 SimpleXMLParser simplify implementation of SAX-based XML Parser
 Take a look to the example package for a fast start. 

@@ -12,9 +12,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import com.gioorgi.xml.UltraSmartParser;
+import com.gioorgi.xml.SimpleXMLParser;
 
-public class WordpressExportReader extends UltraSmartParser {
+public class WordpressExportReader extends SimpleXMLParser {
 
 	/**
 	 * @param args
@@ -25,14 +25,14 @@ public class WordpressExportReader extends UltraSmartParser {
 		BasicConfigurator.configure();
 		
 		XMLReader sax2Parser = XMLReaderFactory.createXMLReader();
-		UltraSmartParser usp = new WordpressExportReader();
-		usp.getLog().setLevel(Level.INFO);
-		sax2Parser.setContentHandler(usp);
+		SimpleXMLParser parser = new WordpressExportReader();
+		parser.getLog().setLevel(Level.INFO);
+		sax2Parser.setContentHandler(parser);
 		File f = new File("c:/jjsoft/gioorgicom.wordpress.2012-08-07.xml");
 		FileInputStream is = new FileInputStream(f);
 		InputSource s = new InputSource(is);
 		sax2Parser.parse(s);
-		usp.getLog().info("DONE");
+		parser.getLog().info("DONE");
 	}
 
 	private String currentTitle,pid;

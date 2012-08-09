@@ -13,9 +13,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import com.gioorgi.xml.UltraSmartParser;
+import com.gioorgi.xml.SimpleXMLParser;
 
-public class UltraSmartExample extends UltraSmartParser {
+public class UltraSmartExample extends SimpleXMLParser {
 
 	/**
 	 * @param args
@@ -23,7 +23,7 @@ public class UltraSmartExample extends UltraSmartParser {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws SAXException, IOException {
-		// System.setProperty("org.xml.sax.driver","org.apache.crimson.parser.XMLReaderImpl");
+		// For your preferred guy System.setProperty("org.xml.sax.driver","org.apache.crimson.parser.XMLReaderImpl");
 		BasicConfigurator.configure();
 		String str = "<A><bad>Hi spencer!</bad><GOOD><DAY>is</DAY><DAY>is2</DAY></GOOD></A>";
 

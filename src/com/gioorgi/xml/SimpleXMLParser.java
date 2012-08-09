@@ -12,29 +12,18 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 
 /**
- * UltraSmartParser semplifica la scrittura di parser a discesa di tipo SAX.
- * 
- * Per usarla creare una sottoclasse, dopodiche' servirsene
- * come mostrato  negli esempi.
- * 
- * 
+ * SimpleXMLParser simplify implementation of SAX-based XML Parser
+ * Take a look to the example package for a fast start. 
+ *  
  * 
  * Speed Introduction
  * 
- * Questa classe e' in grado di richiamare via reflection metodi del tipo
- * do_TAGESTERNO_TAGINTERNO(String contenutoTag) ecc
+ * To start, subclass SimpleXMLParser.
+ * Then if you want to read the code inside
+ * <my><dear><tag>I wnat this string</tag></dear></my>
+ * implement a simple method called
+ * public void do_MY_DEAR_TAG(String tagContent);
  * 
- * E' sufficente definire il metodo che vi serve, e se la superclasse lo trova, 
- * lo chiama.
- * 
- * Per esempio per leggere la stringa "bad" di <A><bad>Hi spencer!</bad></A>
- * Basta creare il metodo do_A_BAD La classe cerca metodi con tag maiuscoli.
- * 
- * I tag possono contenere underscore, la la segnatura divente ambigua:
- * 
- * do_A_GOOD_START e' chiamata sia per: <A_GOOD_START>Hi</A_GOOD_START> sia per
- * <A><GOOD><START>Hoi</START></GOOD></A> Per questa ragione questa classe di
- * utilita' va usata con giudizio!
  * 
  * NB: Name spaces are ignored <wp:pippo> is "pippo"
  * @author giorgi
@@ -42,7 +31,7 @@ import org.xml.sax.SAXException;
  * FirstRev  25-mag-2006 16.04.50 BETA
  * 
  */
-public class UltraSmartParser extends org.xml.sax.helpers.DefaultHandler
+public abstract class SimpleXMLParser extends org.xml.sax.helpers.DefaultHandler
 		implements ContentHandler {
 
 	private boolean optimize=true;

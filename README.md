@@ -17,7 +17,9 @@ Speed Introduction
 ==================
 To start, subclass SimpleXMLParser.
 Then if you want to read the code inside
- <my><dear><tag>I wnat this string</tag></dear></my>
+
+    <my><dear><tag>I want this string</tag></dear></my>
+ 
 implement a simple method called
  public void do_MY_DEAR_TAG(String tagContent)
  {
